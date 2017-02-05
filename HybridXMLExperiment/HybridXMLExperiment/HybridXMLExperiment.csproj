@@ -48,6 +48,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Compression.cs" />
+    <Compile Include="ExperimentLogic.cs" />
     <Compile Include="Keywords.cs" />
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>

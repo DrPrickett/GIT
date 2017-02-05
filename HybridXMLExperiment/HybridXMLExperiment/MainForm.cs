@@ -21,6 +21,7 @@ namespace HybridXMLExperiment
             txtOpenFile.Text = OpenFileToConvert.FileName;
             XmlDocument XDoc = new XmlDocument();
             XDoc.Load(OpenFileToConvert.FileName);
+            cmbBoxElements.Items.Clear();
             foreach (XmlNode thisNode in XDoc.DocumentElement.ChildNodes)
             {
                 cmbBoxElements.Items.Add(thisNode.Name);
@@ -73,6 +74,7 @@ namespace HybridXMLExperiment
             txtOpenFileKeywords.Text = OpenFileToGenerateKeywords.FileName;            
             XmlDocument XDoc = new XmlDocument();
             XDoc.Load(OpenFileToGenerateKeywords.FileName);
+            cmbBoxElementsKeywords.Items.Clear();
             foreach (XmlNode thisNode in XDoc.DocumentElement.ChildNodes)
             {
                 cmbBoxElementsKeywords.Items.Add(thisNode.Name);
@@ -136,5 +138,28 @@ namespace HybridXMLExperiment
         {
             txtSaveFileKeywords.Text = SaveFileLocationKeywords.FileName.ToString();
         }
+
+        private void btnStartExperiment_Click(object sender, EventArgs e)
+        {
+            ExperimentLogic ExpLog = new ExperimentLogic();
+            ExpLog.OnResultsUpdated += new ExperimentLogic.StatusUpdateHandler(ExpLogic_OnResultsUpdated);
+            
+            
+            List<ExperimentLogic.Results> expResults = new List<ExperimentLogic.Results>();
+            expResults = ExpLog.RunExperiment(@"C:\Users\jpricket.AMR\Documents\Doctorate\Dissertation\ExperimentData\HybridXMLExperiment_AutomatedRunPlan.csv", @"C:\Users\jpricket.AMR\Documents\Doctorate\Dissertation\ExperimentData\HybridXMLExperiment_AutomatedRunPlan.log");
+            gridDataStream.DataSource = expResults;
+            gridDataStream.Refresh();
+        }
+
+        private void ExpLogic_OnResultsUpdated(object sender, ExperimentLogic.Results e)
+        {
+            lock (txtLiveOutput)
+            {
+                string oldoutput = txtLiveOutput.Text;
+                txtLiveOutput.Text = e.RUNORDER.ToString() + "," + e.TITLE + "," + e.COMPRESSED + "," + e.KEYWORD + "," + e.TOTALTIME.ToString() + Environment.NewLine + oldoutput;
+                txtLiveOutput.Refresh();
+            }
+        }
+
     }
 }

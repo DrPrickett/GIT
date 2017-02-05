@@ -33,6 +33,7 @@
             System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.btnStartExperiment = new System.Windows.Forms.Button();
             this.chartOutData = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.gridDataStream = new System.Windows.Forms.DataGridView();
             this.txtLiveOutput = new System.Windows.Forms.TextBox();
@@ -84,6 +85,7 @@
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.btnStartExperiment);
             this.tabPage1.Controls.Add(this.chartOutData);
             this.tabPage1.Controls.Add(this.gridDataStream);
             this.tabPage1.Controls.Add(this.txtLiveOutput);
@@ -95,13 +97,23 @@
             this.tabPage1.Text = "Viewer";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
+            // btnStartExperiment
+            // 
+            this.btnStartExperiment.Location = new System.Drawing.Point(11, 20);
+            this.btnStartExperiment.Name = "btnStartExperiment";
+            this.btnStartExperiment.Size = new System.Drawing.Size(166, 23);
+            this.btnStartExperiment.TabIndex = 3;
+            this.btnStartExperiment.Text = "START EXPERIMENT";
+            this.btnStartExperiment.UseVisualStyleBackColor = true;
+            this.btnStartExperiment.Click += new System.EventHandler(this.btnStartExperiment_Click);
+            // 
             // chartOutData
             // 
             chartArea1.Name = "ChartArea1";
             this.chartOutData.ChartAreas.Add(chartArea1);
             legend1.Name = "Legend1";
             this.chartOutData.Legends.Add(legend1);
-            this.chartOutData.Location = new System.Drawing.Point(636, 212);
+            this.chartOutData.Location = new System.Drawing.Point(454, 382);
             this.chartOutData.Name = "chartOutData";
             series1.ChartArea = "ChartArea1";
             series1.Legend = "Legend1";
@@ -116,15 +128,15 @@
             this.gridDataStream.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.gridDataStream.Location = new System.Drawing.Point(6, 212);
             this.gridDataStream.Name = "gridDataStream";
-            this.gridDataStream.Size = new System.Drawing.Size(624, 150);
+            this.gridDataStream.Size = new System.Drawing.Size(1151, 150);
             this.gridDataStream.TabIndex = 1;
             // 
             // txtLiveOutput
             // 
-            this.txtLiveOutput.Location = new System.Drawing.Point(3, 37);
+            this.txtLiveOutput.Location = new System.Drawing.Point(3, 66);
             this.txtLiveOutput.Multiline = true;
             this.txtLiveOutput.Name = "txtLiveOutput";
-            this.txtLiveOutput.Size = new System.Drawing.Size(1154, 169);
+            this.txtLiveOutput.Size = new System.Drawing.Size(1154, 140);
             this.txtLiveOutput.TabIndex = 0;
             // 
             // tabPage2
@@ -410,6 +422,7 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox txtCommonWords;
         private System.Windows.Forms.DataGridView datagridKeywords;
+        private System.Windows.Forms.Button btnStartExperiment;
     }
 }
 
