@@ -146,7 +146,8 @@ namespace HybridXMLExperiment
             
             
             List<ExperimentLogic.Results> expResults = new List<ExperimentLogic.Results>();
-            expResults = ExpLog.RunExperiment(@"C:\Users\jpricket.AMR\Documents\Doctorate\Dissertation\ExperimentData\HybridXMLExperiment_AutomatedRunPlan.csv", @"C:\Users\jpricket.AMR\Documents\Doctorate\Dissertation\ExperimentData\HybridXMLExperiment_AutomatedRunPlan.log");
+            //expResults = ExpLog.RunExperiment(@"C:\Users\jpricket.AMR\Documents\Doctorate\Dissertation\ExperimentData\HybridXMLExperiment_AutomatedRunPlan.csv", @"C:\Users\jpricket.AMR\Documents\Doctorate\Dissertation\ExperimentData\HybridXMLExperiment_Output.csv");
+            expResults = ExpLog.RunExperiment(@txtExpRunPlanLocation.Text, @txtExpResultsOutput.Text);
             gridDataStream.DataSource = expResults;
             gridDataStream.Refresh();
         }
@@ -156,10 +157,30 @@ namespace HybridXMLExperiment
             lock (txtLiveOutput)
             {
                 string oldoutput = txtLiveOutput.Text;
+                
                 txtLiveOutput.Text = e.RUNORDER.ToString() + "," + e.TITLE + "," + e.COMPRESSED + "," + e.KEYWORD + "," + e.TOTALTIME.ToString() + Environment.NewLine + oldoutput;
                 txtLiveOutput.Refresh();
             }
         }
 
+        private void OpenFileInputRunPlan_FileOk(object sender, CancelEventArgs e)
+        {
+            txtExpRunPlanLocation.Text = OpenFileInputRunPlan.FileName;
+        }
+
+        private void btnRunPlanFile_Click(object sender, EventArgs e)
+        {
+            OpenFileInputRunPlan.ShowDialog();
+        }
+
+        private void btnExpOutputFile_Click(object sender, EventArgs e)
+        {
+            saveFileExpResults.ShowDialog();
+        }
+
+        private void saveFileExpResults_FileOk(object sender, CancelEventArgs e)
+        {
+            txtExpResultsOutput.Text = saveFileExpResults.FileName;
+        }
     }
 }

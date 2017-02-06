@@ -28,13 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.btnStartExperiment = new System.Windows.Forms.Button();
-            this.chartOutData = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.gridDataStream = new System.Windows.Forms.DataGridView();
             this.txtLiveOutput = new System.Windows.Forms.TextBox();
             this.tabPage2 = new System.Windows.Forms.TabPage();
@@ -62,9 +58,14 @@
             this.SaveFileLocation = new System.Windows.Forms.SaveFileDialog();
             this.OpenFileToGenerateKeywords = new System.Windows.Forms.OpenFileDialog();
             this.SaveFileLocationKeywords = new System.Windows.Forms.SaveFileDialog();
+            this.txtExpRunPlanLocation = new System.Windows.Forms.TextBox();
+            this.txtExpResultsOutput = new System.Windows.Forms.TextBox();
+            this.OpenFileInputRunPlan = new System.Windows.Forms.OpenFileDialog();
+            this.btnRunPlanFile = new System.Windows.Forms.Button();
+            this.btnExpOutputFile = new System.Windows.Forms.Button();
+            this.saveFileExpResults = new System.Windows.Forms.SaveFileDialog();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.chartOutData)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridDataStream)).BeginInit();
             this.tabPage3.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -85,8 +86,11 @@
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.btnExpOutputFile);
+            this.tabPage1.Controls.Add(this.btnRunPlanFile);
+            this.tabPage1.Controls.Add(this.txtExpResultsOutput);
+            this.tabPage1.Controls.Add(this.txtExpRunPlanLocation);
             this.tabPage1.Controls.Add(this.btnStartExperiment);
-            this.tabPage1.Controls.Add(this.chartOutData);
             this.tabPage1.Controls.Add(this.gridDataStream);
             this.tabPage1.Controls.Add(this.txtLiveOutput);
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
@@ -99,7 +103,7 @@
             // 
             // btnStartExperiment
             // 
-            this.btnStartExperiment.Location = new System.Drawing.Point(11, 20);
+            this.btnStartExperiment.Location = new System.Drawing.Point(929, 19);
             this.btnStartExperiment.Name = "btnStartExperiment";
             this.btnStartExperiment.Size = new System.Drawing.Size(166, 23);
             this.btnStartExperiment.TabIndex = 3;
@@ -107,33 +111,21 @@
             this.btnStartExperiment.UseVisualStyleBackColor = true;
             this.btnStartExperiment.Click += new System.EventHandler(this.btnStartExperiment_Click);
             // 
-            // chartOutData
-            // 
-            chartArea1.Name = "ChartArea1";
-            this.chartOutData.ChartAreas.Add(chartArea1);
-            legend1.Name = "Legend1";
-            this.chartOutData.Legends.Add(legend1);
-            this.chartOutData.Location = new System.Drawing.Point(454, 382);
-            this.chartOutData.Name = "chartOutData";
-            series1.ChartArea = "ChartArea1";
-            series1.Legend = "Legend1";
-            series1.Name = "Series1";
-            this.chartOutData.Series.Add(series1);
-            this.chartOutData.Size = new System.Drawing.Size(514, 150);
-            this.chartOutData.TabIndex = 2;
-            this.chartOutData.Text = "chart1";
-            // 
             // gridDataStream
             // 
+            this.gridDataStream.AllowUserToAddRows = false;
+            this.gridDataStream.AllowUserToDeleteRows = false;
+            this.gridDataStream.AllowUserToOrderColumns = true;
             this.gridDataStream.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.gridDataStream.Location = new System.Drawing.Point(6, 212);
+            this.gridDataStream.Location = new System.Drawing.Point(6, 236);
             this.gridDataStream.Name = "gridDataStream";
-            this.gridDataStream.Size = new System.Drawing.Size(1151, 150);
+            this.gridDataStream.ReadOnly = true;
+            this.gridDataStream.Size = new System.Drawing.Size(1151, 237);
             this.gridDataStream.TabIndex = 1;
             // 
             // txtLiveOutput
             // 
-            this.txtLiveOutput.Location = new System.Drawing.Point(3, 66);
+            this.txtLiveOutput.Location = new System.Drawing.Point(6, 90);
             this.txtLiveOutput.Multiline = true;
             this.txtLiveOutput.Name = "txtLiveOutput";
             this.txtLiveOutput.Size = new System.Drawing.Size(1154, 140);
@@ -367,6 +359,51 @@
             this.SaveFileLocationKeywords.Filter = "XML Files|.xml;*.XML|All Files|*.*";
             this.SaveFileLocationKeywords.FileOk += new System.ComponentModel.CancelEventHandler(this.SaveFileLocationKeywords_FileOk);
             // 
+            // txtExpRunPlanLocation
+            // 
+            this.txtExpRunPlanLocation.Location = new System.Drawing.Point(10, 19);
+            this.txtExpRunPlanLocation.Name = "txtExpRunPlanLocation";
+            this.txtExpRunPlanLocation.Size = new System.Drawing.Size(584, 20);
+            this.txtExpRunPlanLocation.TabIndex = 4;
+            // 
+            // txtExpResultsOutput
+            // 
+            this.txtExpResultsOutput.Location = new System.Drawing.Point(10, 64);
+            this.txtExpResultsOutput.Name = "txtExpResultsOutput";
+            this.txtExpResultsOutput.Size = new System.Drawing.Size(584, 20);
+            this.txtExpResultsOutput.TabIndex = 5;
+            // 
+            // OpenFileInputRunPlan
+            // 
+            this.OpenFileInputRunPlan.Filter = "CSV Files|*.csv.xml;*.CSV|All Files|*.*";
+            this.OpenFileInputRunPlan.RestoreDirectory = true;
+            this.OpenFileInputRunPlan.FileOk += new System.ComponentModel.CancelEventHandler(this.OpenFileInputRunPlan_FileOk);
+            // 
+            // btnRunPlanFile
+            // 
+            this.btnRunPlanFile.Location = new System.Drawing.Point(618, 19);
+            this.btnRunPlanFile.Name = "btnRunPlanFile";
+            this.btnRunPlanFile.Size = new System.Drawing.Size(206, 23);
+            this.btnRunPlanFile.TabIndex = 6;
+            this.btnRunPlanFile.Text = "Select RunPlan File";
+            this.btnRunPlanFile.UseVisualStyleBackColor = true;
+            this.btnRunPlanFile.Click += new System.EventHandler(this.btnRunPlanFile_Click);
+            // 
+            // btnExpOutputFile
+            // 
+            this.btnExpOutputFile.Location = new System.Drawing.Point(618, 61);
+            this.btnExpOutputFile.Name = "btnExpOutputFile";
+            this.btnExpOutputFile.Size = new System.Drawing.Size(206, 23);
+            this.btnExpOutputFile.TabIndex = 7;
+            this.btnExpOutputFile.Text = "Select Results Ouput File";
+            this.btnExpOutputFile.UseVisualStyleBackColor = true;
+            this.btnExpOutputFile.Click += new System.EventHandler(this.btnExpOutputFile_Click);
+            // 
+            // saveFileExpResults
+            // 
+            this.saveFileExpResults.Filter = "CSV Files|.csv;*.CSV|All Files|*.*";
+            this.saveFileExpResults.FileOk += new System.ComponentModel.CancelEventHandler(this.saveFileExpResults_FileOk);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -378,7 +415,6 @@
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.chartOutData)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridDataStream)).EndInit();
             this.tabPage3.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
@@ -395,7 +431,6 @@
         private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.TabPage tabPage2;
-        private System.Windows.Forms.DataVisualization.Charting.Chart chartOutData;
         private System.Windows.Forms.DataGridView gridDataStream;
         private System.Windows.Forms.TextBox txtLiveOutput;
         private System.Windows.Forms.TabPage tabPage3;
@@ -423,6 +458,12 @@
         private System.Windows.Forms.TextBox txtCommonWords;
         private System.Windows.Forms.DataGridView datagridKeywords;
         private System.Windows.Forms.Button btnStartExperiment;
+        private System.Windows.Forms.TextBox txtExpResultsOutput;
+        private System.Windows.Forms.TextBox txtExpRunPlanLocation;
+        private System.Windows.Forms.OpenFileDialog OpenFileInputRunPlan;
+        private System.Windows.Forms.Button btnExpOutputFile;
+        private System.Windows.Forms.Button btnRunPlanFile;
+        private System.Windows.Forms.SaveFileDialog saveFileExpResults;
     }
 }
 
